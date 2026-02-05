@@ -3,10 +3,9 @@ title: "Homework Assignment 1"
 author: "Student:  Anna Sehgal"
 format: html
 toc: false
-```{r}
+#```{r}
 
-```
-
+#```
 ---
 
 
@@ -17,9 +16,10 @@ Please type your answer within the document and render a html file to submit to 
 ---
 
 ## 1 — Identify each variable as quantitative or qualitative
-## Definitions:
-# Quantative data = related to numbers or is measureable is empirical data.
-# While Qualitative data = related to descriptive or based on interpretation like emotion, langauge, or category.
+**Definitions:**
+
+- Quantative data = related to numbers or is measureable is empirical data.
+- While Qualitative data = related to descriptive or based on interpretation like emotion, langauge, or category.
 
 
 A. The height of a newborn in a hospital is `__Quantative_data__`
@@ -34,10 +34,14 @@ D. The blood type of a middle school teacher is `__Qualitative_data__`
 ---
 
 ## 2 — Classify each quantitative variable as discrete or continuous
-# as learned in class:
-# discreate variable are whole number which can do a certain job; values can be enuramated (numerical values with jumos).
-# while continious is basically dependening on measurement, accuracy; can be any number on numberline (possible values can take a continuum of number).
-# another thing I found was that discrete data is counter and has spaced between values while continuous has constant sequence within a defined range.
+As learned in class:
+
+* discrete variable are whole number which can do a certain job; values can be enuramated (numerical values with jumps).
+
+* while continious is basically dependening on measurement, accuracy; can be any number on number-line (possible values can take a continuum of number).
+
+* another thing I found was that discrete data is counter and has spaced between values while continuous has constant sequence within a defined range.
+
 A. Number of siblings of a student is `__Discrete_variable__`
 
 B. Number of dead batteries in a box of dozen batteries is `__Discrete_variable__`
