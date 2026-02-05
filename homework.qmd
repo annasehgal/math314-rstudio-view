@@ -4,7 +4,7 @@ author: "Student:  Anna Sehgal"
 format: html
 toc: false
 #```{r}
-
+#rcode stuff
 #```
 ---
 
@@ -77,18 +77,20 @@ a. What is the population she is interested in?  `__(D)_All Lake Tahoe Community
 * **(D) All Lake Tahoe Community College math students**
 
 
-b. Consider X represent the number of days a LTCC math student is absent. In this case X is an example of a: `_____`
+b. Consider X represent the number of days a LTCC math student is absent. In this case X is an example of a: `_(A)_Variable___`
 
-* (A) Variable
+#it should be a variable because it depends on student to student.
+
+* **(A) Variable** 
 * (B) Population
 * (C) Statistic
 * (D) Data
 
-c. The instructor’s sample produces a mean number of days absent of `3.5` days. This value is an example of a: `_____`
+c. The instructor’s sample produces a mean number of days absent of `3.5` days. This value is an example of a: `__(C)_Statistic__`
 
 * (A) Parameter
 * (B) Data
-* (C) Statistic
+* **(C) Statistic**
 * (D) Variable
 
 
@@ -98,11 +100,15 @@ c. The instructor’s sample produces a mean number of days absent of `3.5` days
 
 For each study below mark A (REPRESENTATIVE) or B (NON-REPRESENTATIVE):
 
-1. Sample of 300 dentists from Seattle used to estimate median income of all Seattle residents. `_____`
-2. Sample of 200 professional football players to estimate mean weight of all adult males.  `_____`
-3. Simple random sample of 10 men over age 18 to estimate mean height of all adult males.  `_____`
-4. Simple random sample of 1000 voters to determine candidate chances.  `_____`
-5. Sample of 400 patients from a local hospital to estimate mean cholesterol of U.S. citizens.  `_____`
+1. Sample of 300 dentists from Seattle used to estimate median income of all Seattle residents. `___Non-representative___`
+
+2. Sample of 200 professional football players to estimate mean weight of all adult males.  `___Non-representative___`
+
+3. Simple random sample of 10 men over age 18 to estimate mean height of all adult males.  `___Representative___`
+
+4. Simple random sample of 1000 voters to determine candidate chances.  `___Representative___`
+
+5. Sample of 400 patients from a local hospital to estimate mean cholesterol of U.S. citizens.  `___Non-Representative___`
 
 ---
 
@@ -113,7 +119,7 @@ For each study below mark A (REPRESENTATIVE) or B (NON-REPRESENTATIVE):
 Population test scores: `78, 84, 87, 70, 92, 78, 59, 82, 81, 64, 97, 76`
 
 A. What is the population mean grade? (round to 1 decimal)
-Answer: `_____`
+Answer: `______`
 
 B. A random sample of size 3: sample `92, 82, 87` — sample mean = `_____`; compare to population mean: `_____`.
 
@@ -134,7 +140,8 @@ D. What can you conclude about relationship between a sample mean and the popula
 
 Given sample: `3, 17, 25, 15, 11, 17, 28, 15, 4`
 
-A. What symbol denotes the sample standard deviation? `_____`
+A. What symbol denotes the sample standard deviation? `___s___`
+
 B. Find the sample standard deviation (round to 2 decimals): `_____`
 
 ---
@@ -144,7 +151,9 @@ B. Find the sample standard deviation (round to 2 decimals): `_____`
 Sample data: `6.5, 6.5, 7, 7, 5.5, 7.5, 6, 8.5, 8, 5.5, 5.5, 5, 6.5, 8, 5`
 
 A. Range = `_____`
+
 B. Standard deviation = `_____` (round to 2 decimals)
+
 C. IQR = `____`
 
 D. Suppose the 5th data value was recorded as `55` instead of `5.5`. Recompute new range and SD:
@@ -159,7 +168,9 @@ D. Suppose the 5th data value was recorded as `55` instead of `5.5`. Recompute n
 ## 9 — Compute mean & median; skewness
 
 Grades: `98, 92, 91, 91, 87, 85, 85, 82, 77, 76, 61`
+
 Mean = `_____`
+
 Median = `_____`
 
 
