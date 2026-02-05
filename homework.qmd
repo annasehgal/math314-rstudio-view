@@ -1,0 +1,168 @@
+---
+title: "Homework Assignment 1"
+author: "Student:  Anna Sehgal"
+format: html
+toc: false
+```{r}
+
+```
+
+---
+
+
+# Instructions
+
+Please type your answer within the document and render a html file to submit to Canvas
+
+---
+
+## 1 — Identify each variable as quantitative or qualitative
+## Definitions:
+# Quantative data = related to numbers or is measureable is empirical data.
+# While Qualitative data = related to descriptive or based on interpretation like emotion, langauge, or category.
+
+
+A. The height of a newborn in a hospital is `__Quantative_data__`
+
+B. The age of a football player is `__Quantative_data__`
+
+C. The student social security number is `__Qualitative_data__` 
+#Though ssn has numbers linked to a student, it is to identify rather than to measure something.
+
+D. The blood type of a middle school teacher is `__Qualitative_data__`
+
+---
+
+## 2 — Classify each quantitative variable as discrete or continuous
+# as learned in class:
+# discreate variable are whole number which can do a certain job; values can be enuramated (numerical values with jumos).
+# while continious is basically dependening on measurement, accuracy; can be any number on numberline (possible values can take a continuum of number).
+# another thing I found was that discrete data is counter and has spaced between values while continuous has constant sequence within a defined range.
+A. Number of siblings of a student is `__Discrete_variable__`
+
+B. Number of dead batteries in a box of dozen batteries is `__Discrete_variable__`
+
+C. Time it takes to respond to a question is `__Continuous_variable__`
+
+D. Systolic blood pressure is `__Continuous_variable__`
+
+---
+
+## 3 — Observational study or designed experiment?
+
+A. A study of stress and its relationship to obesity where participants were surveyed: `__Observational_study__`
+
+B. Longitudinal study of healthy people to see who develops lung cancer (smoking status recorded): `__Observational_study__`
+
+C. Clinical trial randomly dividing participants into two diet groups to measure blood pressure: `__Designed_experiment__`
+
+D. Rats randomly divided into exposed/unexposed groups to radiation and observed for cancer: `__Designed_experiment__`
+
+---
+
+
+## 4 — Population / variable / statistic questions
+
+A Lake Tahoe Community College instructor is interested in the mean number of days math students are absent during a quarter.
+
+a. What is the population she is interested in?  `__(D)_All Lake Tahoe Community College math students__`
+
+* (A) All Lake Tahoe Community College students
+* (B) All Lake Tahoe Community College English students
+* (C) All Lake Tahoe Community College students in her classes
+* **(D) All Lake Tahoe Community College math students**
+
+
+b. Consider X represent the number of days a LTCC math student is absent. In this case X is an example of a: `_____`
+
+* (A) Variable
+* (B) Population
+* (C) Statistic
+* (D) Data
+
+c. The instructor’s sample produces a mean number of days absent of `3.5` days. This value is an example of a: `_____`
+
+* (A) Parameter
+* (B) Data
+* (C) Statistic
+* (D) Variable
+
+
+---
+
+## 5 — Representative or non-representative?
+
+For each study below mark A (REPRESENTATIVE) or B (NON-REPRESENTATIVE):
+
+1. Sample of 300 dentists from Seattle used to estimate median income of all Seattle residents. `_____`
+2. Sample of 200 professional football players to estimate mean weight of all adult males.  `_____`
+3. Simple random sample of 10 men over age 18 to estimate mean height of all adult males.  `_____`
+4. Simple random sample of 1000 voters to determine candidate chances.  `_____`
+5. Sample of 400 patients from a local hospital to estimate mean cholesterol of U.S. citizens.  `_____`
+
+---
+
+
+
+## 6 — Population & sample means (12 students)
+
+Population test scores: `78, 84, 87, 70, 92, 78, 59, 82, 81, 64, 97, 76`
+
+A. What is the population mean grade? (round to 1 decimal)
+Answer: `_____`
+
+B. A random sample of size 3: sample `92, 82, 87` — sample mean = `_____`; compare to population mean: `_____`.
+
+C. Another sample of size 3: sample `59, 84, 64` — sample mean = `_____`; compare to population mean: `_____`.
+
+D. What can you conclude about relationship between a sample mean and the population mean? (`_____`)
+
+* (A) The sample mean varies from sample to sample.
+* (B) No matter how many times we select a sample, the sample mean is always equal to the population mean.
+* (C) Every time we select a sample, the sample mean always overestimates the population mean.
+* (D) Every time we select a sample, the sample mean always underestimates the population mean.
+
+
+
+---
+
+## 7 — Sample standard deviation
+
+Given sample: `3, 17, 25, 15, 11, 17, 28, 15, 4`
+
+A. What symbol denotes the sample standard deviation? `_____`
+B. Find the sample standard deviation (round to 2 decimals): `_____`
+
+---
+
+## 8 — Sleep survey (15 students)
+
+Sample data: `6.5, 6.5, 7, 7, 5.5, 7.5, 6, 8.5, 8, 5.5, 5.5, 5, 6.5, 8, 5`
+
+A. Range = `_____`
+B. Standard deviation = `_____` (round to 2 decimals)
+C. IQR = `____`
+
+D. Suppose the 5th data value was recorded as `55` instead of `5.5`. Recompute new range and SD:
+
+* New range = `_____`
+* New SD = `_____` (round to 2 decimals)
+* New IQR = `_____`
+
+
+
+
+## 9 — Compute mean & median; skewness
+
+Grades: `98, 92, 91, 91, 87, 85, 85, 82, 77, 76, 61`
+Mean = `_____`
+Median = `_____`
+
+
+
+- Present the Histogram
+
+
+- Is this dataset `SKEWED RIGHT`, `SYMMETRIC`, or `SKEWED LEFT`?
+
+
