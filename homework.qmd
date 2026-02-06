@@ -3,11 +3,125 @@ title: "Homework Assignment 1"
 author: "Student:  Anna Sehgal"
 format: html
 toc: false
-#```{r}
-#rcode stuff
-#```
 ---
 
+## R scripts ran:
+```{r}
+#question 6
+population_sample <- c(78, 84, 87, 70, 92, 78, 59, 82, 81, 64, 97, 76)
+
+population_sample
+# 6a 
+mean(population_sample)
+population_mean <-round(mean(population_sample), 1)
+population_mean
+
+#6b
+random_sample <- c(92, 82, 87)
+random_sample
+mean(random_sample)
+random_sample_mean <- mean(random_sample)
+
+if(random_sample_mean > population_mean) {
+    print("random mean sample is greater than population mean sample.")
+} else if (random_sample_mean == population_mean){
+    print("random mean sample is equal to population sample mean.")
+} else {
+    print("populatioin sample mean is greater than random sample mean.")
+}
+
+#6c
+population_sample
+population_mean_data <-mean(population_sample)
+population_mean_data
+
+sample2 <- c(59, 84, 64)
+sample2
+mean(sample2)
+random_sample_2 <- mean(sample2)
+
+if(random_sample_2 > population_mean_data) {
+    print("random mean sample is greater than population mean sample.")
+} else if (random_sample_2 == population_mean_data){
+    print("random mean sample is equal to population sample mean.")
+} else {
+    print("population sample mean is greater than random sample mean.")
+}
+
+#Question 7
+sample_question7 <- c(3, 17, 25, 15, 11, 17, 28, 15, 4)
+sample_question7
+# reference (for standard deviation in R studio): https://www.datacamp.com/tutorial/r-sd
+sd(sample_question7)
+standard_div <- sd(sample_question7)
+standard_div
+round(standard_div, 2)
+
+# Question 8
+sleep_data_sample <- c(6.5, 6.5, 7, 7, 5.5, 7.5, 6, 8.5, 8, 5.5, 5.5, 5, 6.5, 8, 5)
+sleep_data_sample
+
+#8a
+# The range is the difference between the largest and smallest values in a sample
+max_sample <- max(sleep_data_sample)
+min_sample <- min(sleep_data_sample)
+max_sample
+min_sample
+
+range_sample_sleep <- (max_sample - min_sample)
+range_sample_sleep
+
+#8b
+sleep_data_sample
+standard_div_sleep <- sd(sleep_data_sample)
+standard_div_sleep
+standard_div_sleep_rounded <- round(standard_div_sleep, 2)
+standard_div_sleep_rounded
+
+#8c
+sleep_data_sample
+IQR(sleep_data_sample)
+
+#8d
+new_55_sleep_data_sample <- sleep_data_sample
+#fix position 5 arr in data to 55
+new_55_sleep_data_sample[5] <- 55
+
+new_55_sleep_data_sample
+
+new_max_sample <- max(new_55_sleep_data_sample)
+new_min_sample <- min(new_55_sleep_data_sample)
+new_max_sample
+new_min_sample
+
+new_range_sample_sleep <- (new_max_sample - new_min_sample)
+new_range_sample_sleep
+
+new_55_sleep_data_sample
+new_standard_div_sleep <- sd(new_55_sleep_data_sample)
+new_standard_div_sleep
+new_standard_div_sleep_rounded <- round(new_standard_div_sleep, 2)
+new_standard_div_sleep_rounded
+
+new_55_sleep_data_sample
+IQR(new_55_sleep_data_sample)
+
+# Question 9
+grades_sample <- c(98, 92, 91, 91, 87, 85, 85, 82, 77, 76, 61)
+
+grades_sample
+
+grades_mean <- mean(grades_sample)
+grades_median <- median(grades_sample)
+grades_mean
+grades_median
+
+# histogram for 9
+hist(grades_sample)
+
+```
+
+---
 
 # Instructions
 
@@ -119,15 +233,15 @@ For each study below mark A (REPRESENTATIVE) or B (NON-REPRESENTATIVE):
 Population test scores: `78, 84, 87, 70, 92, 78, 59, 82, 81, 64, 97, 76`
 
 A. What is the population mean grade? (round to 1 decimal)
-Answer: `______`
+Answer: `___79.0____`
 
-B. A random sample of size 3: sample `92, 82, 87` — sample mean = `_____`; compare to population mean: `_____`.
+B. A random sample of size 3: sample `92, 82, 87` — sample mean = `___87___`; compare to population mean: `___random sample mean is greater than population sample mean___`.
 
-C. Another sample of size 3: sample `59, 84, 64` — sample mean = `_____`; compare to population mean: `_____`.
+C. Another sample of size 3: sample `59, 84, 64` — sample mean = `___69___`; compare to population mean: `___population mean is greater than population sample mean___`.
 
-D. What can you conclude about relationship between a sample mean and the population mean? (`_____`)
+D. What can you conclude about relationship between a sample mean and the population mean? (`__(A)_The sample mean varies from sample to sample.__`)
 
-* (A) The sample mean varies from sample to sample.
+* ***(A) The sample mean varies from sample to sample.***
 * (B) No matter how many times we select a sample, the sample mean is always equal to the population mean.
 * (C) Every time we select a sample, the sample mean always overestimates the population mean.
 * (D) Every time we select a sample, the sample mean always underestimates the population mean.
@@ -142,7 +256,7 @@ Given sample: `3, 17, 25, 15, 11, 17, 28, 15, 4`
 
 A. What symbol denotes the sample standard deviation? `___s___`
 
-B. Find the sample standard deviation (round to 2 decimals): `_____`
+B. Find the sample standard deviation (round to 2 decimals): `___8.35___`
 
 ---
 
@@ -150,17 +264,17 @@ B. Find the sample standard deviation (round to 2 decimals): `_____`
 
 Sample data: `6.5, 6.5, 7, 7, 5.5, 7.5, 6, 8.5, 8, 5.5, 5.5, 5, 6.5, 8, 5`
 
-A. Range = `_____`
+A. Range = `___3.5___`
 
-B. Standard deviation = `_____` (round to 2 decimals)
+B. Standard deviation = `___1.13___` (round to 2 decimals)
 
-C. IQR = `____`
+C. IQR = `__1.75__`
 
 D. Suppose the 5th data value was recorded as `55` instead of `5.5`. Recompute new range and SD:
 
-* New range = `_____`
-* New SD = `_____` (round to 2 decimals)
-* New IQR = `_____`
+* New range = `___50___`
+* New SD = `___12.54___` (round to 2 decimals)
+* New IQR = `___2___`
 
 
 
@@ -169,15 +283,19 @@ D. Suppose the 5th data value was recorded as `55` instead of `5.5`. Recompute n
 
 Grades: `98, 92, 91, 91, 87, 85, 85, 82, 77, 76, 61`
 
-Mean = `_____`
+Mean = `___84.09091___`
 
-Median = `_____`
+Median = `___85___`
 
 
 
 - Present the Histogram
+```{R}
+hist(grades_sample)
+```
 
 
 - Is this dataset `SKEWED RIGHT`, `SYMMETRIC`, or `SKEWED LEFT`?
 
+  ***The dataset is SKEWED LEFT in the histogram.***
 
