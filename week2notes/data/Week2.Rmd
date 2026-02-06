@@ -1,0 +1,68 @@
+---
+title: "Week2"
+output: html_document
+---
+
+# library(ggplot2)
+# data <- iris
+# list of data
+# data <- c(49,-10,27,13,36,19,48,21,8,16,32,28,-13,31,2,19,19,35,-8,23,13,8,41,12)
+# mean(data)
+#data[3] = NA for missing/not available
+# data[1] <- NA
+# data
+# mean(data, na.rm )
+# create a list/vector of data
+# ----------------
+library(ggplot2)
+data <- iris
+data <- c(49,-10,27,13,36,19,48,21,8,16,32,28,-13,31,2,19,19,35,-8,23,13,8,41,12)
+#sensitive to extreme values
+mean(data)
+# not effected by values NA for median
+median(data)
+hist(data)
+#data[1] <- NA
+#data
+#mean(data, na.rm= T) 
+#mean wont work with NA values, so we have to remove them
+
+#median(data, na.rm= T)
+summary(data)
+IQR(data)
+var(data)
+sqrt(var(data))
+
+#----------------------------
+# Jan 29
+#----------------------------
+library(ggplot2)
+data <- mpg
+# data$<variable name>
+hist(data$cty)
+# data, <datasetname>
+ggplot(data, aes(x = cty)) +
+  geom_histogram(fill = "blue", color = "black", binwidth = 3)
+median(data$cty)
+IQR(data$cty)
+boxplot(data$cty)
+ggplot(data, aes(y = cty)) +
+  boxplot()
+table(data$trans)
+barplot(table(data$trans))
+ggplot(data, aes(x = trans)) +
+  geom_bar()
+  
+plot(data$cty, data$hwy)
+ggplot(data, aes(x = cty, y = hwy)) +
+  geom_point()
+# 
+data
+boxplot(data$cty ~ data$drv)
+ggplot(data, aes(x = drv, y = hwy)) + 
+  geom_boxplot()
+  
+table(data$year)
+barplot(table(data$year, data$drv))
+#ggplot(data, aes(x = [year, fill = drv])) +  geom_bar()
+ggplot(data, aes(x = as.factor(year), fill = drv)) + geom_bar()
