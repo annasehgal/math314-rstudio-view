@@ -1,0 +1,106 @@
+---
+title: "Homework Assignment 2"
+author: ""
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## March work day (10 pts)
+
+R functions for common set operations (when you have *actual sets/vectors* of outcomes):
+
+```{r, echo = TRUE, eval = FALSE}
+x <- c(1, 2, 3)
+y <- c(2, 3, 4, 5)
+union(x, y)      # combined elements
+intersect(x, y)  # shared elements
+setdiff(x, y)    # elements in x but not y (order matters)
+setequal(x, y)   # are the sets equal?
+```
+
+You have a vector of March 2026 dates (`march`), and vectors `weekends` and `springbreak`. Use R’s set operations to find the dates of **non‑vacation weekdays**.
+
+```{r}
+march <- 1:31
+weekends <- c(1, 7, 8, 14, 15, 21, 22, 28, 29)
+springbreak <- 16:20
+```
+
+## Two yellow balloons (20 pts)
+
+**Problem :**  
+There are 16 balloons: 5 yellow, 8 red, 3 green. Two darts pop two balloons (without replacement).
+
+Let:
+
+- $P(1_{yellow})$ = probability first balloon is yellow
+- $P(2_{yellow})$ = probability second balloon is yellow
+
+1. Given first is yellow, find $P(2_{yellow}\mid 1_{yellow})$.
+
+
+
+2. Find $P(1_{yellow}\cap 2_{yellow})$ (both balloons yellow).
+
+
+
+## Sequential system with A, B, C (15 pts)
+
+A sequential system fails if **any** component fails. Components fail independently with:
+
+- $p_A=0.02$
+- $p_B=0.01$
+- $p_C=0.03$
+
+Find $P(\text{system fails})$.
+
+
+## Problem parallel system (15 pts) 
+
+A parallel system functions if **at least one** component functions. Components function **independently** with:
+
+- $p_D=0.78$
+- $p_E=0.75$
+- $p_F=0.82$
+
+Find $P(\text{parallel system functions})$.
+
+## Spam detection using keywords problem (Bayes' Theorem) (20 pts)
+
+
+An email service provider is designing a spam filter. From historical data, the company knows:
+
+* **20%** of all incoming emails are spam.
+* A specific keyword (for example, “FREE!!!”) appears in:
+
+  * **60%** of spam emails
+  * **5%** of legitimate (non-spam) emails
+
+Suppose a new email arrives and it **contains this keyword**. What is the probability that the email is spam? 
+
+## Two way contingency table (20 pts)
+
+Suppose you are helping the police develop a new test for blood alcohol levels. The potential advantage of the test is that it can be used during a routine traffic stop, but neither you nor the police are sure how accurate the test is. By design, the test should be positive when blood alcohol level is above $0.05\%.$
+
+The test has been used on a large number of subjects where a more expensive, less convenient test is known to give perfectly accurate results. The table below shows the proportions for the outcome of the new test and true blood alcohol status:
+
+| Test result | Alcohol level > 0.05%  | Alcohol level <= 0.05% |
+|-------------|------------------------|------------------------|
+| Positive    | 0.08                   | 0.3                    |
+| Negative    | 0.02                   | 0.6                    |
+	
+a) What is the probability that a randomly selected driver has both a positive test and a blood alcohol level higher than $0.05\%$? 
+	
+b) For a randomly selected driver, what is the probability that the test will be positive? 
+	
+c) Among drivers who have a positive test, what is the probability that a driver has a blood alcohol level higher than $0.05\%$? 
+	
+d) Suppose $A$ is the event that a driver has a positive test result and $B$ is the event that the driver has a blood alcohol level above $0.05\%$. Are $A$ and $B$ independent? Justify your answer. 
