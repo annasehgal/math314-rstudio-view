@@ -1,6 +1,6 @@
 ---
 title: "Homework Assignment 2"
-author: ""
+author: "Anna Sehgal"
 format:
   html:
     toc: true
@@ -30,8 +30,19 @@ You have a vector of March 2026 dates (`march`), and vectors `weekends` and `spr
 
 ```{r}
 march <- 1:31
+march
 weekends <- c(1, 7, 8, 14, 15, 21, 22, 28, 29)
+weekends
 springbreak <- 16:20
+springbreak
+all_holidays <- union(weekends, springbreak)
+all_holidays
+non_vacation_weekdays <- setdiff(march, all_holidays)
+non_vacation_weekdays
+```
+```{r}
+total_non_vacation_weekdays <- length(non_vacation_weekdays)
+total_non_vacation_weekdays 
 ```
 
 ## Two yellow balloons (20 pts)
@@ -47,9 +58,43 @@ Let:
 1. Given first is yellow, find $P(2_{yellow}\mid 1_{yellow})$.
 
 
+First balloon (yellow) is popped then:
+
+$5-1 = 4$ (since first is popped, so we minus one)
+
+$16-1 = 15$ (since one is popped and not replaceable, we decrease one from total)
+
+So $P(2_{yellow}\mid 1_{yellow}) = \frac{4}{15} = 0.2666667$
+```{r}
+4/15
+```
+
 
 2. Find $P(1_{yellow}\cap 2_{yellow})$ (both balloons yellow).
 
+$$P(A \cap B) = P(A) \times P(B|A),$$
+$P(A) = P(1_{yellow})$ and $P(B|A) = P(2_{yellow}\mid 1_{yellow})$
+
+$$P(1_{yellow} \cap 2_{yellow}) = P(1_{yellow}) \times P(2_{yellow}|1_{yellow})$$
+$P(A) = P(1_{yellow})$ = $5/16$ = $0.3125$ (first balloon being yellow)
+```{r}
+5/16
+```
+
+$P(B|A) = P(2_{yellow}\mid 1_{yellow})$ = $4/15$ = $0.2666667$ (probablity of second being yellow that is popped)
+```{r}
+4/15
+```
+
+from question 1: $P(2_{yellow}\mid 1_{yellow}) = \frac{4}{15}  = 0.2666667$
+
+And finally for both is:
+
+$P(1_{yellow} \cap 2_{yellow}) = P(1_{yellow}) \times P(2_{yellow}|1_{yellow})$ = $0.3125 \times 0.2666667$
+```{r}
+0.3125*0.2666667
+```
+$P(1_{yellow} \cap 2_{yellow})$ = $0.08333334$
 
 
 ## Sequential system with A, B, C (15 pts)
@@ -62,6 +107,45 @@ A sequential system fails if **any** component fails. Components fail independen
 
 Find $P(\text{system fails})$.
 
+Fail for independent event probablity:
+
+P(A) = 0.02
+
+P(B) = 0.01
+
+P(C) = 0.03
+
+
+System works
+$A^C: 1 - 0.02 = 0.98$
+
+```{r}
+1 - 0.02
+```
+
+$B^C: 1 - 0.01 =0.99 $
+
+```{r}
+1 - 0.01
+```
+
+$C^C : 1 - 0.03 = 0.97$
+```{r}
+1 - 0.03
+```
+
+P(Working system) = $(P(A^C \cap B^C \cap C^C))$ = $(P(A^C) * P(B^C) * P(C^C))$ = $(0.98 \times 0.99 \times 0.97)$ = $0.941094$
+```{r}
+system_working <- 0.98*0.99*0.97
+system_working
+```
+
+Probablity of System failure : 1 - P(Working system) = $1 - 0.941094$ = $0.058906$
+```{r}
+system_failure <- 1 - 0.941094
+system_failure
+```
+
 
 ## Problem parallel system (15 pts) 
 
@@ -72,6 +156,41 @@ A parallel system functions if **at least one** component functions. Components 
 - $p_F=0.82$
 
 Find $P(\text{parallel system functions})$.
+
+P(D) = 0.78
+
+P(E) = 0.75
+
+P(F) = 0.82
+
+
+Case if atleast one functions fails: 
+
+$D^C: 1 - 0.78 = 0.22$
+```{r}
+1 - 0.78
+```
+
+$E^C: 1 - 0.75 = 0.25$
+```{r}
+1 - 0.75
+```
+
+$F^C: 1 - 0.82 = 0.18$
+```{r}
+1 - 0.82
+```
+
+P(work system) = $1- (P(D^C \cap E^C \cap F^C))$ = $1 - (P(D^C) * P(E^C) * P(F^C))$ = $(0.22 \times 0.25 \times 0.18)$ = $1 - 0.0099$ = $0.9901$
+```{r}
+system_fails <- 0.22*0.25*0.18
+system_fails
+```
+
+```{r}
+system_working_atleastone <- 1 - 0.0099
+system_working_atleastone
+```
 
 ## Spam detection using keywords problem (Bayes' Theorem) (20 pts)
 
@@ -86,6 +205,34 @@ An email service provider is designing a spam filter. From historical data, the 
 
 Suppose a new email arrives and it **contains this keyword**. What is the probability that the email is spam? 
 
+To do: Find if it contains keyword and spam $P(S|KE)$
+
+Let S = all emails are spam, KE = keyword 
+
+$P(S) = 20% = 0.20$
+
+Non-spam = $P(S^C)$ = $1- 0.20$ = 0.8
+```{r}
+non_spam <- 1- 0.20
+non_spam
+```
+
+$P(KE | S) = 60% = 0.60 $ (keyword in spam)
+
+$P(KE |S^C) = 5% = 0.05 $ (keyword is legitimate)
+
+Formula used: $$P(B|A) = {P(A \cap B) \over P(A)} = {P(A|B) \times P(B) \over P(A|B) \times P(B) + P(A|\bar B) \times P(\bar B)}$$
+
+So: $P(S|KE) = {P(KE|S) \times P(S) \over P(KE| S) \times P(S) + P(KE|\bar S) \times P(\bar S)}$
+
+$=> P(S|KE) = {0.60 \times 0.20 \over 0.60 \times 0.20 + 0.05 \times 0.8}$ = 0.75 = 75% is spam having a keyword
+```{r}
+p_of_email_being_spam <- (0.60*0.20)/((0.60*0.20) + (0.05* 0.8))
+p_of_email_being_spam
+```
+
+
+
 ## Two way contingency table (20 pts)
 
 Suppose you are helping the police develop a new test for blood alcohol levels. The potential advantage of the test is that it can be used during a routine traffic stop, but neither you nor the police are sure how accurate the test is. By design, the test should be positive when blood alcohol level is above $0.05\%.$
@@ -98,9 +245,71 @@ The test has been used on a large number of subjects where a more expensive, les
 | Negative    | 0.02                   | 0.6                    |
 	
 a) What is the probability that a randomly selected driver has both a positive test and a blood alcohol level higher than $0.05\%$? 
-	
+
+- Let A = positive test, B = alcohol level > 0.05%
+- Using formula $P(A \cap B)$ since it is an intersection in this case.
+
+***= P(Alcohol level > 0.05% $\cap$ Positive) = 0.08 = 8%***
+
 b) For a randomly selected driver, what is the probability that the test will be positive? 
+
+- P(A) = sum of positive tests
+$$P(A) = P(A \cap B) + P(A \cap \bar B) $$ = 0.08 + 0.3 = 0.38 = 38%
+
+```{r}
+positive_probablity <- 0.08 + 0.3
+positive_probablity
+```
+
 	
 c) Among drivers who have a positive test, what is the probability that a driver has a blood alcohol level higher than $0.05\%$? 
+
+- P(A) = 0.38 (from part b)
+- $P(A \cap B)$ = 0.08
+$$P(B|A) = {P(A \cap B) \over P(A)}$$ 
+$= \frac{0.08}{0.38}$ =  0.2105263 = 21.05%
+```{r}
+probablity_positivetest_higher <- 0.08/0.38
+probablity_positivetest_higher
+```
+
 	
 d) Suppose $A$ is the event that a driver has a positive test result and $B$ is the event that the driver has a blood alcohol level above $0.05\%$. Are $A$ and $B$ independent? Justify your answer. 
+
+Formulas for independent events for A and B: 
+$P(A \cap B) = P(A) \times  P(B)$
+
+Also two events $A$ and $B$ are independent if $P(B|A) = P(B)$
+
+We already know:
+- P(A) = 0.38
+- P($A \cap B$) = 0.08
+
+So: P(B) = sum of alcohol level (both negative and positive) above $0.05\%$ = 0.08 + 0.02 = 0.1
+
+```{r}
+p_of_b <- 0.08 + 0.02
+p_of_b
+
+```
+
+Verification using formula for independent: P($A \cap B$)  = P(A) $\times$ P(B) = 0.38 \times 0.1 = 0.038
+
+```{r}
+verify <- 0.38*0.1
+verify
+```
+
+```{r}
+P_A_intersect_B <- 0.08
+P_A <- 0.38
+P_B <- 0.1
+
+if (P_A_intersect_B == P_A * P_B) {
+  print("It is independent")
+} else {
+  print("It is NOT independent")
+}
+```
+
+This means that P(A \cap B) is not same as P(B) since 0.038 is not same as 0.1 as $P(A \cap B) ≠ P(A) \times P(B)$ ***Therefore, not independent***
