@@ -1,0 +1,363 @@
+---
+title: "Homework Assignment 4"
+author: "Anna Sehgal"
+#output: pdf_document
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: false
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(123)
+```
+
+## 1. The Poisson Distribution (40 pts Total)
+
+**Concept:** Models the number of events occurring within a fixed interval of time or space.
+
+### Scenario: Website Traffic
+
+A website receives an average of **5 hits per minute**. Assume that the number of hits the website receives
+follows Poisson distribution
+
+1. Find the probability of receiving exactly 3 hits in a minute.
+The probability of receiving exactly 3 hits in a minute
+
+Given $\lambda = 5$
+
+From notes from week 5 we know that, Probability Mass Function (P.M.F) is
+$$ f(x;\lambda) = \frac{\lambda^{x} \cdot e^{-\lambda}}{x!}$$
+
+Here x would be equal to th enumber of hits in a minute. Therfore $x = 3$
+
+Substituting values: 
+$$ f(x=3;\lambda=5) = \frac{5^{3} \cdot e^{-5}}{3!}$$
+$$=> \frac{125 \cdot e^{-5}}{3 \cdot 2 \cdot 1}$$
+$$=> \frac{125 \cdot e^{-5}}{6}$$
+
+Value of $e^{-5}$ is:
+```{r}
+exp(-5)
+```
+
+Therefore $e^{-5} = 0.006737947$
+
+$$=> \frac{125 \cdot 0.006737947}{6}$$
+```{r}
+threehitsprobability <- (125*0.006737947)/6
+threehitsprobability
+```
+
+$$ f(x=3;\lambda=5) = 0.1403739$$
+
+Therefore, the probability of receiving exactly 3 hits in a minute  is 0.1403739. That is 14.03739%.
+
+Visual:
+```{r}
+lambda = 5
+max_x = 30
+
+#for plotting diff range
+x <- 0:max_x
+pmfx <- dpois(x, lambda)
+poisx <- data.frame(x =x , pmfx =pmfx)
+prob_3 <- dpois(3, lambda)
+library(dplyr)
+library(ggplot2)
+poisx %>% ggplot(aes(x = x, y = pmfx, fill = x == 3)) + 
+  geom_col(alpha = 0.7, width = 0.5) +
+  scale_fill_manual(values = c("FALSE" = "blue", "TRUE" = "pink"), guide = "none") + labs(title = "Poisson Distribution (λ = 5)", subtitle = paste("P(X = 3) =", round(prob_3, 4)), x = "Number of Hits", y = "Probability") + theme_minimal()
+```
+
+
+2. Find the probability of receiving less than 10 hits in a minute.
+
+Given xvals < 10 hits, $\lambda$ = 5
+
+$$ f(x;\lambda) = \sum_{x=0}^{xvals} \frac{\lambda^{x} \cdot e^{-\lambda}}{xvals!}$$
+P(xvals < 10) = P(x ≤ 9)
+
+$$ f(x;\lambda) = \sum_{x=0}^{9} \frac{5^{xvals} \cdot e^{-5}}{xvals!}$$
+
+```{r}
+# it would be computed using ppois, not 1-ppois since it is not X ≥ value but instead X ≤ 9 (x> 10)
+lamdba <- 5
+tenhitprobablity <- ppois(9, lamdba) 
+tenhitprobablity
+```
+
+Therefore, the probability of receiving less than 10 hits in a minute (x > 10) is 0.9681719, which is 96.81719%.
+
+
+3. Simulation & Visualization
+
+a.Generate a vector called hits with length 1000 that simulates the number of hits using rpois().
+
+```{r}
+lamdba <- 5
+hits <- rpois(1000, lamdba)
+hits
+```
+
+b.Create a histogram of this data with hist().
+
+```{r}
+library(ggplot2)
+lambda = 5
+hits <- rpois(1000, lambda)
+hist(hits)
+```
+
+c.Add a vertical red line at the mean using abline().
+```{r}
+library(ggplot2)
+lambda = 5
+hits <- rpois(1000, lambda)
+hist(hits)
+#https://stackoverflow.com/questions/56875191/how-to-plot-simple-vertical-line-with-abline-in-r
+meanhits <- mean(hits)
+abline(v= meanhits, col="red", lwd=2)
+```
+
+
+## 2. The Normal Distribution (30 pts, 15 pts each)
+
+
+### Scenario: A factory produces precision ball bearings. The target diameter is 25.00 mm. Due to machine variance, the diameters follow a Normal distribution with a mean ($\mu$) of 25.00 mm and a standard deviation ($\sigma$) of 0.02 mm.
+
+a: Defect RatesBearings are considered defective if they are smaller than 24.95 mm or larger than 25.05 mm. Use pnorm() to calculate the total proportion of defective bearings.
+
+Given:
+
+$\mu$ = 25.00mm 
+
+$\sigma$ = 0.02 mm
+
+RatesBearings are defective if they x < 24.95mm or if x > 25.05mm.
+
+Formula for Z from week notes for standard normal distribution :
+$$Z := {X - \mu \over \sigma}$$
+for the following: 
+$$P(a < X < b) = P\left( {a - \mu \over \sigma} < Z < {b - \mu \over \sigma} \right) = \Phi\left( {b - \mu \over \sigma} \right) - \Phi\left( {a - \mu \over \sigma} \right).$$
+Therefore: 
+For X = 24.95 mm
+Formula for Z from week notes for standard normal distribution :
+$$Z = {24.95 mm - 25.00mm  \over 0.02 mm} = -2.5$$
+```{r}
+lower = (24.95-25.00)/0.02
+lower
+```
+
+So, $P(X < -2.5)= P(Z < -2.5)$ for X = 24.95 mm
+
+
+And for X = 25.05 mm
+Formula for Z from week notes for standard normal distribution :
+$$Z = {25.05 mm - 25.00mm  \over 0.02 mm} = 2.5$$
+```{r}
+upper = (25.05-25.00)/0.02
+upper
+```
+So, $P(X > 2.5) = P(Z > 2.5)$ for X = 25.05 mm
+
+Total proportion would be added in this case: So P(X <24.95 mm) + P(X>25.05 mm).
+```{r}
+mu <- 25 #mean
+sigma <- 0.02 #sd
+lowerp <- pnorm(q = 24.95, mean = mu, sd = sigma)
+lowerp
+```
+
+```{r}
+mu <- 25 #mean
+sigma <- 0.02 #sd
+upperp <- 1 - pnorm(q = 25.05 , mean = mu, sd = sigma) # due to upper
+upperp
+```
+
+```{r}
+lowerp <-  0.006209665
+upperp <- 0.006209665
+totaldefectp <- lowerp + upperp
+totaldefectp
+```
+
+Therefore, the total proportion of defective bearings P(totaldefective) = 0.01241933 which is 1.241933%
+
+b: Identifying Thresholds
+The quality control team wants to flag the smallest 1% of bearings for manual inspection. Use qnorm() to find the diameter threshold for this bottom 1%.
+
+R command:
+```{r}
+mu <- 25 #mean
+sigma <- 0.02 #sd
+thresholds <- qnorm(p = 0.01, mean = mu, sd = sigma)
+thresholds
+```
+Based on the function, threshold for bottom 1% is 24.95347 mm.
+
+Verification: Figure out the smallest 1% = 0.01 for P(X<x) =0.01
+
+Formula for Z from week notes for standard normal distribution :
+$$Z_{0.01} = {X - \mu \over \sigma}$$
+
+Here X = thresholds
+
+So,
+$$Z_{0.01} = {thresholds - \mu \over \sigma}$$
+plugging values:
+$$Z_{0.01} = {24.95347 - 25 \over 0.02}$$
+```{r}
+zvalueonepercent <- (24.95347 - 25)/0.02
+zvalueonepercent
+```
+
+Verification:
+$$Z \cdot \sigma= X- \mu$$ 
+$$Z \cdot \sigma + \mu= X$$
+
+$$=> X = \mu + Z \sigma$$ 
+$$=> X = 25 + (-2.33)*0.02$$ 
+```{r}
+Xvalue <- 25 + (-2.33)*0.02
+Xvalue
+```
+Therefore, verified that 24.9534 mm is the diameter threshold for this bottom 1%.
+
+---
+
+## 3. The Exponential Distribution (10 pts each Total: 30 pts + Bonus 10 pts)
+
+**Concept:** Models the time between events in a Poisson process.
+
+### Scenario: Call Center Waiting Time
+
+The time between calls at a help desk follows an exponential distribution with a rate  of **2 calls per hour**.
+For the help desk, assume arrivals are a Poisson process.
+
+a. Let $T$ be the waiting time (in hours) until the next ticket. What distribution does $T$ follow and what is its rate parameter?
+Given that:
+
+rate = $\lambda = 2$ calls per hour
+
+X = T
+
+T~Exp($\lambda$)
+
+from Module 5 notes, exponential distribution:
+$$f(x|\lambda) = \begin{cases} \lambda \exp{(-\lambda x)} & x \geq 0 \\ 0 & x < 0 \end{cases}$$
+T~Exp(2)
+
+Since x≥0 so $\lambda \exp(-\lambda x)$
+
+Therefore: 
+$$f(T|\lambda) = 2 \exp(-2T)$$
+
+
+b. Compute the probability you wait **more than 45 minutes** for the next ticket.
+
+P(45 minutes)= P(0.75 hours)
+
+Let $T \sim \text{Exponential}(\lambda = 2)$. The cumulative distribution function (CDF) is derived from the probability density function (PDF):
+
+PDF:  
+$$f(T) = \lambda e^{-\lambda t}, \quad T \ge 0$$
+
+CDF:  
+$$F(T) = P(T \le t) = \int_0^T \lambda e^{-\lambda x} \, dx$$
+
+$$
+=>\int_0^T \lambda e^{-\lambda x} \, dx = \Big[- e^{-\lambda x} \Big]_0^T = -(e^{-\lambda T} - 1) = 1 - e^{-\lambda T}
+$$
+
+So the CDF is:  
+$$F(T) = 1 - e^{-\lambda T}$$
+
+Then the probability of waiting more than t is:
+$$P(T > T) = 1 - F(T) = e^{-\lambda T}$$
+$$P(T > 0.75) = 1 - F(T) = e^{-2 \cdot 0.75}$$
+```{r}
+lambda <- 2
+t <- 0.75 
+probt <-exp(-lambda * t)
+probt
+```
+
+Therefore it is 0.2231302 for probability of waiting more than 45 minutes which is 0.75 hours.
+
+
+c. Compute the median waiting time.
+Median is the middle = 50% = 0.50
+P(T≤wait) = 0.5
+$$F(T) = 1 - e^{-\lambda T}$$
+$$0.5 = 1 - e^{-\lambda T}$$
+$$=> 1 - 0.5 = e^{-\lambda T}$$
+$$=> 0.5 = e^{-\lambda T}$$
+$\lambda$ = 2
+
+So $-2 T = log(0.5)$
+
+Then, $T = -log(0.5)/2$
+
+```{r}
+T <- -log(0.5)/2
+T
+```
+
+Therefore, P(T>45 minutes) median is 0.3465736 hrs, which is 20.794416 minutes.
+
+
+(Challenge Question) d. Memoryless property check: verify numerically that
+   $P(T > s+t \mid T > s) = P(T > t)$ using s = 0.5, t = 0.3. 
+   
+   
+   $$P(T > 0.5+0.3 \mid T > 0.5) = P(T > 0.3)$$
+   
+We know : Then the probability of waiting more than t is:
+$$P(T > t) = 1 - F(t) = e^{-\lambda t}$$
+
+So,
+$$P(T>0.3) = e^{-2 \cdot 0.3}$$
+```{r}
+-2*0.3
+```
+$$P(T>0.3) = e^{-0.6}$$
+
+and for 
+   $$P(T > 0.5+0.3 \mid T > 0.5)$$
+    $$=>P(T > 0.8 \mid T > 0.5)$$
+$$=>P(T > 0.8)/P(T > 0.5)$$
+
+from: 
+$$P(T > t) = 1 - F(t) = e^{-\lambda t}$$
+P(T > 0.8)= $e^{-2 \cdot 0.8}$ = 
+
+```{r}
+-2*0.8
+```
+P(T > 0.8)= $e^{-1.6}$ 
+
+P(T > 0.5) = $e^{-2 \cdot 0.5}$ =
+```{r}
+-2*0.5
+```
+P(T > 0.5)= $e^{-1}$ 
+
+$$=>e^{-1.6}/e^{-1}$$ 
+$$=>e^{-0.6}$$ 
+
+Therefore both sides are $e^{-0.6} = e^{-0.6}$. So:
+```{r}
+exp(-0.6)
+```
+
+Meaning that both sides are 0.5488116 = 0.5488116.
+Therefore, verified.
