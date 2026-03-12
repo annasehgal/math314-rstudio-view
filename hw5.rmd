@@ -1,6 +1,6 @@
 ---
 title: "HW5"
-
+name: Anna Sehgal
 output: pdf_document
 ---
 
@@ -28,31 +28,82 @@ A. The Poisson distribution is often used to describe how many times an event ta
 
  $f(x | \lambda) = \frac{\lambda^x e^{-\lambda}}{x!}$
 
+![](hw5images/parta.png)
+
+
 
 B. Bernoulli distribution is a special binomial distribution when the parameter n = 1. The PDF for Bernoulli distribution is $f(x | p) = p^x(1-p)^{1-x}$. Please derive the MLE for $p$ given n observations $x_1, \ldots, x_n$ independently and identically drawn from the Bernoulli distribution with parameter $p$.
+
+![](hw5images/partb.png)
 
 ## Part II: Computational optimization for getting MLE using `optim` function in R. (50 pts)
 
 A. Assume $x_1, \ldots, x_N$ are independently drawn from Poisson($\lambda$).  Using the simplified log-likelihood for the Poisson distribution from Part I A.
 
 a) Generate 1000 random numbers from Poisson distribution with parameter $\lambda = 10$. 
+```{r}
+set.seed(1)
+n <- 1000
+lamdbaparam <- 10
+#notes from: https://lmu-osc.github.io/Introduction-Simulations-in-R/tutorial_pages/random-numbers-generators.html
+#runif(n, min, max) draws n values from a uniform distribution with the specified min and max.
+#rpois(n, lambda) draws n values from a Poisson distribution with the specified lambda.
+#rnorm(n, mean, sd) draws n values from a normal distribution with the specified mean and standard deviation sd.
+#rbinom(n, prob) draws n values from a binomial distribution with the specified probability prob.
+x_varible <- rpois(n, lamdbaparam)
+x_varible
+```
+
 
 b) Write the simplified log-likelihood in R code (Please show your code).
+
+```{r}
+llfunc <- function(lambda, x_variable){
+  N <- length(x_variable)
+  sumofx <- sum(x_variable)
+  llx <- sumofx * log(lambda) - N * lambda
+  return(-llx)
+}
+```
+
+
 	
 c) Write `R` code using the function `optim` to find the maximum likelihood estimator for $\lambda$. 
 
+```{r}
+optimresult <- optim(par = 1, fn = llfunc, method = "L-BFGS-B", lower = 0, 
+                     x_variable = x_varible)$par
+optimresult
+```
 
 
 B. Assume $x_1, \ldots, x_N$ are independently drawn from Bernoulli($p$).  Using the simplified log-likelihood for the Bernoulli distribution from Part I B.
 
 a) Generate 1000 random numbers from Bernoulli distribution with parameter $p = 0.15$. 
+```{r}
+set.seed(1)
+n <- 1000
+pval <- 0.15
+# rbinom(n, size, prob) draws n samples from a binomial distribution, bernoulli size = 1
+bernoulli_data <- rbinom(n, size = 1, prob = pval)
+bernoulli_data
+```
 
 b) Write the simplified log-likelihood in R code (Please show your code).
+
+```{r}
+llfuncb <- function(pval, x_variable) {
+  N <- length(x_variable)
+  sumofxvar <- sum(x_variable)
+  llb <- sumofxvar * log(pval) + (N - sumofxvar) * log(1 - pval)
+  return(-llb)
+}
+```
+
 	
 c) Write `R` code using the function `optim` to find the maximum likelihood estimator for $p$. 
-
-
-
-
-
-
+```{r}
+omptimb <- optim(par = 0.5, fn = llfuncb, x_variable = bernoulli_data,
+                 method = "L-BFGS-B", lower = 0.0001, upper = 0.9999)$par
+omptimb
+```
