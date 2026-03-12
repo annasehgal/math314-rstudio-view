@@ -1,6 +1,6 @@
 ---
 title: "HW3_Instruction"
-author: "name"
+author: "Anna Sehgal"
 output: pdf_document
 ---
 
@@ -31,13 +31,92 @@ $P(X=x)$ & 0.10 & 0.20 & 0.30 & 0.40\\
 \end{tabular}
 \end{center}
 
-a) Find $P(X\geq 2)$.
+a) Find $P(X\geq 2)$. 
+
+$P(X \geq 2) = P(2 < X < 3)$
+
+Here: $P(X = 2) = 0.30$ and $P(X = 3) = 0.40$
+
+Therefore = $P(X \geq 2) = P(X = 2) + P(X = 3)$
+
+
+$$=> P(X \geq 2) = 0.30 + 0.40$$
+```{r}
+Pgeqtwo <- 0.30 +0.40
+Pgeqtwo
+```
+
+$=> P(X \geq 2) = 0.7$
+
+Therefore, $P(X \geq 2) = 0.7$
+
 
 b) Find $P(X \geq 2|X\geq 1)$.
 
+$$P(X \geq 2 \mid X \geq 1)$$
+
+we know 
+
+$$\Rightarrow P(X \geq 2) = 0.70$$
+
+now,
+
+$$\Rightarrow P(X \geq 1) = P(1 < X < 3)$$
+
+Therefore $P(X \geq 1) = P(X = 1) + P(X = 2) + P(X = 3)$
+$$=> P(X \geq 1) =0.20 + 0.30 + 0.40$$
+
+```{r}
+Pgeqone <- 0.20+0.30 +0.40
+Pgeqone
+```
+
+Therefore, $P(X \geq 1) = 0.90$
+
+Now $P(X \geq 2|X\geq 1) = \frac{P(X \geq 2)}{P(X \geq 1)}$
+
+$$P(X \geq 2|X\geq 1) = \frac{0.70}{0.90}$$
+
+```{r}
+pgeqoneandtwo <- 0.70/0.90
+pgeqoneandtwo
+```
+
+Therefore, $P(X \geq 2|X\geq 1) = 0.7777778$
+
+
 c) Find $E(X)$.
+$$=>E(X) = \sum x*f(x)$$
+where f(x) = P(X=x)
+$$=>E(X) = \sum x*P(X=x)$$
+$$=>E(X) = 0*0.10+1*0.20+2*0.30+3*0.40$$
+
+```{r}
+ex = 0*0.10+1*0.20+2*0.30+3*0.40
+ex
+```
+Therefore: $=>E(X) = 2$
+
 
 d) Find $\text{Var(X)}$.
+
+$$Var(X) = \sum(x - E(X))^2 P(X=x)$$
+
+
+$Var(X)$ = ($(x_1 - E(x_1))^2 * f(x_1)$) + ($(x_2 - E(x_2))^2 * f(x_2)$) + ($(x_3 - E(x_3))^2 * f(x_3)$)
+
+Here, $E(X)= 2$
+
+$$Var(X) = (0 - 2)^2(0.10) + (1 - 2)^2(0.20) + (2 - 2)^2(0.30) + (3 - 2)^2(0.40)$$
+
+```{r}
+varx <- ((0 - 2)^2 *(0.10)) + ((1 - 2)^2 * (0.20)) + ((2 - 2)^2*(0.30)) + ((3 - 2)^2 * (0.40))
+varx
+```
+
+
+Therefore, $Var(X) = 1$
+
 
 ## Part II: Expected value and variance (20 pts)
 
@@ -51,52 +130,193 @@ $P(X=x)$ & 1-p & p \\
 \end{center}
 
 a) Find $E(X)$.
+$$=>E(X) = \sum x*f(x)$$
+where f(x) = P(X=x)
+$$=>E(X) = \sum x*P(X=x)$$
+$$E(X) = 0*(1 - p) + 1*(p)$$
+$$E(X) = 0 + (p)$$
+$$E(X) =p$$
 
 b) Find $\text{Var(X)}$.
+
+$$Var(X) = \sum(x - E(X))^2 P(X=x)$$
+
+$$ =>Var(X) = (0 - E(X))^2 P(X=0) + (1 - E(X))^2 P(X=1)$$
+$$Var(X) = (0 - p)^2 (1 - p) + (1 - p)^2 (p)$$
+$$Var(X) = p^2(1 - p) + (1 - p)^2 p$$
+$$Var(X) = p(1 - p)(p + (1 - p))$$
+So $p + (1 - p) = 1$:
+$$Var(X) = p(1 - p)(1)$$
+$$Var(X) = p(1 - p)$$
 
 ## Part III:  Binomial Distribution (Total 40 pts, 10 pts each)
 According to data from the CDC, about 37.1\% of adults (individuals 18 years of age or older) in the United States and 57.9\% of children (individuals between 6 months and 17 years of age) in the United States received a flu vaccine during the 2017-2018 flu season. 
 
 a) Consider a random sample of 50 adults. 
 
+Here 37.1\% = 0.371
+
+X~Binomial(50, 0.371)
+
+$P(X = x)$ = `dbinom(x, n, p)`
+
     i. Calculate the probability that exactly 20 adults received a flu vaccine.
+  $$P(X = 20) = \binom{50}{20}(0.371)^{20}(0.629)^{30}$$
+  n=50, k=20, p=0.371
+```{r}
+dbinom(20, 50, 0.371)
+```
+So P(exactly 20 adults receiving a flu vaccine) is 0.1047823.
     
     ii. Calculate the probability that exactly 30 adults did not receive a flu vaccine.
+    
+    
+$$P(Y = 30) = \binom{50}{30}(0.629)^{30}(0.371)^{20}$$
+    
+So, it would be 1-0.371 = 0.629
+
+Y~Binomial(50,   0.629)
+```{r}
+dbinom(30, 50, 0.629)
+```
+Therefore, P(30 not vaccinated) is 0.1047823.
 
 b) Consider a random sample of 20 children.
 
+57.9\% =0.579   
+ 
+$P(X \le x)$ = `pbinom(x, n, p)`
+
     i. What is the probability that at most 10 children received a flu vaccine?
+    
+X~Binomial(20, 0.579)
+
+x=10, n=20, p=0.579
+
+$P(X \le 10) = pbinom(10, 20, 0.579)$
+
+```{r}
+pbinom(10, 20, 0.579)
+```
+
+Therefore, the $P(X \le 10) = 0.309678$
+
 
     ii. What is the probability that at least 11 children received a flu vaccine?
 
+$$P(X \geq 11) = 1 - P(X \leq 10)$$
+
+$$P(X \geq 11) = 1 -pbinom(10, 20, 0.579)$$
+
+```{r}
+1-pbinom(10, 20, 0.579)
+```
+
+Therefore, $P(X \geq 11) = 0.690322$
+
+
 c) State two assumptions you needed to make in order to answer parts a) and b). Briefly comment on the extent to which those assumptions were reasonable.
 
+**1. All adults or children have same probability of being vaccinated. Again for larger population or sample this is assumed reasonable, however we don't know about one person in individual due to other factors like income, and more affecting their ability to be vaccinated.**
+
+**2. For each person, vaccination decision is independent of all others people. This is reasonable for large sample since it is an individual decision, but could depend for one data point only, but for bigger this is reasonable.**
+
 d) Consider a random sample of $n = 70$ individuals, which consists of 50 adults and 20 children. Let $Z$ represent the total number of individuals who received the flu vaccine in the sample of 70 individuals. Does $Z$ follow a binomial distribution? Explain your answer.
+
+**Here, p= 0.371 for 50 adults and p=0.579 for 20 children **
+
+**It would not follow binomial distribution because the probability p value is not same for adult and children, therefore cannot be combined in this case since it is known for having independent with identical success probability.** 
 
 
 ## Part IV Consider a senior Statistics concentrator with a packed extracurricular schedule, taking five classes, and writing a thesis. Each time she takes an exam, she either scores very well (at least two standard deviations above the mean) or does not. Her performance on any given exam depends on whether she is operating on a reasonable amount of sleep the night before (more than 7 hours), relatively little sleep (between 4 - 7 hours, inclusive), or practically no sleep (less than 4 hours). (20 pts)
 
 When she has had practically no sleep, she scores very well about 30\% of the time. When she has had relatively little sleep, she scores very well 40\% of the time. When she has had a reasonable amount of sleep, she scores very well 42\% of the time. Over the course of a semester, she has a reasonable amount of sleep 50\% of nights, and practically no sleep 30\% of nights.
 
+| Sleep type   | N    | L    | R    | Total |
+|--------------|------|------|------|-------|
+| P(S\|Sleep)  | 0.30 | 0.40 | 0.42 |       |
+| P(Sleep)     | 0.30 | 0.20 | 0.50 | 1     |
+
+where $P(S|\text{Sleep})$ denotes the probability of scoring very well given sleep type, 
+and $P(\text{Sleep})$ denotes the probability of each sleep type.
+
+$$P(N) = 0.30, \quad P(R) = 0.50, \quad P(L) = 1 - 0.50 - 0.30 = 0.20$$
+
+```{r}
+ 0.50-0.30 
+```
+
+
+
+
   a) What is her overall probability of scoring very well on an exam?
+
+$$P(S) = P(S \mid N) \cdot P(N) + P(S \mid L) \cdot P(L) + P(S \mid R) \cdot P(R)$$
+
+$$P(S) = (0.30)(0.30) + (0.40)(0.20) + (0.42)(0.50) = 0.09 + 0.08 + 0.21 = 0.38$$
+
+```{r}
+Probscorewell <- 0.30 * 0.30 + 0.40 * 0.20 + 0.42 * 0.50
+Probscorewell
+```
+
+Therefore P(scoring well overall on exam) =0.38.
   
   b) What is the probability she had practically no sleep the night before an exam where she scored very well?
+
+$$P(N|S) = \frac{P(S \cap N)}{P(S)}$$
+
+$$P(N|S) =\frac{P(S|N) \cdot P(N)}{P(S)}$$
+
+$$P(N|S) =\frac{0.30 \cdot 0.30}{0.38}$$
+
+```{r}
+Pnosleepscorewell <- (0.30*0.30)/0.38
+Pnosleepscorewell
+```
+
+Therefore, the probability she had practically no sleep the night before an exam where she scored very well is 0.2368421.
+
     
   c) Suppose that one day she has three exams scheduled. What is the probability that she scores very well on exactly two of the exams, under the assumption that her performance on each exam is independent of her performance on another exam? (10 pts)
+
+Using binomial theorem:
+$$f(x) = P(X=x) = \frac{n!}{x!(n-x)!} p^x (1-p)^{n-x}$$
+
+therefore,
+$$P(X=2) = \frac{3!}{2!(3-2)!}(0.38)^2(0.62)^1 = \binom{3}{2}(0.38)^2(0.62)^1 $$
+
+```{r}
+dbinom(2, size = 3, prob = 0.38)
+```
+
+Therefore, the probability that she scores very well on exactly two of the exams, under the assumption that her performance on each exam is independent of her performance on another exam is 0.268584.
     
   d) What is the probability that she had practically no sleep the night prior to a day when she scored very well on exactly two out of three exams?
+  
+
+$$f(x) = P(X=x) = \frac{n!}{x!(n-x)!} p^x (1-p)^{n-x}$$
+
+$$P(X=2|N) = \frac{3!}{2!(3-2)!}(0.30)^2(0.70)^1 = \binom{3}{2}(0.30)^2(0.70)^1$$
+
+```{r}
+dbinom(2, size=3, prob=0.30)
+```
+$$P(X=2|N) =  0.189$$
 
 
- 
+$$P(X=2) = P(X=2|N)P(N) + P(X=2|L)P(L) + P(X=2|R)P(R)$$
 
+```{r}
+Pxistwo <- (dbinom(2,3,0.30)*0.30) + (dbinom(2,3,0.40)*0.20) + (dbinom(2,3,0.42)*0.50)
+Pxistwo
+```
 
-## Part VI Bonus (Optional, the purpose is to encourage your efforts in learning and character growth. Bonus points could be given but not limited to the following efforts)
-a. Attend community coding or office hours: please list the date, time and the faculty/student assistant you met.
-b. Write a statement of how you overcome the difficulties in life in order to learn.
-c. Write your questions regarding lectures. 
+$$P(N|X=2) = \frac{P(X=2|N) \cdot P(N)}{P(X=2)}$$
 
-
-
-
-
-
+```{r}
+Pxistwo <- (dbinom(2,3,0.30)*0.30) + (dbinom(2,3,0.40)*0.20) + (dbinom(2,3,0.42)*0.50)
+Pnxistwo <- (dbinom(2,3,0.30) * 0.30)/Pxistwo
+Pnxistwo
+```
+Therefore, $P(N|X=2) =0.2117505$ is probability that she had practically no sleep the night prior to a day when she scored very well on exactly two out of three exams.
